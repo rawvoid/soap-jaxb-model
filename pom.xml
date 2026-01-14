@@ -8,18 +8,113 @@
     <packaging>jar</packaging>
 
     <name>jaxb-soap</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/rawvoid/jaxb-soap</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <encoding>UTF-8</encoding>
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>4.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.42</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>6.0.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>4.0.12</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>schema</schemaDirectory>
+                    <generateDirectory>${project.build.sourceDirectory}</generateDirectory>
+                    <episodeFile>${project.build.directory}/xjc/soap-episode.xml</episodeFile>
+                    <cleanPackageDirectories>true</cleanPackageDirectories>
+                    <locale>en_US</locale>
+                    <extension>true</extension>
+                    <args>
+                        <arg>-Xremove-getter</arg>
+                        <arg>-Xremove-setter</arg>
+
+                        <arg>-Xannotate</arg>
+                        <arg>-add-to-class</arg>
+                        <arg>-anno=@lombok.Data</arg>
+                        <arg>-anno=@lombok.experimental.Accessors(chain = true)</arg>
+                        <arg>-anno=@jakarta.annotation.Generated("https://github.com/rawvoid/jaxb-plugins")</arg>
+
+                        <arg>-Xconvert-name</arg>
+                        <arg>-package-name</arg>
+                        <arg>-token=http://schemas.xmlsoap.org/soap/envelope/</arg>
+                        <arg>-name=io.github.rawvoid.soap.model.v1_1</arg>
+                        <arg>-property-name</arg>
+                        <arg>-token=faultcode</arg>
+                        <arg>-name=faultCode</arg>
+                        <arg>-property-name</arg>
+                        <arg>-token=faultstring</arg>
+                        <arg>-name=faultString</arg>
+                        <arg>-property-name</arg>
+                        <arg>-token=faultactor</arg>
+                        <arg>-name=faultActor</arg>
+
+                        <arg>-Xns-prefix</arg>
+                        <arg>-config</arg>
+                        <arg>-xmlns</arg>
+                        <arg>-ns=http://schemas.xmlsoap.org/soap/envelope/</arg>
+                        <arg>-prefix=SOAP-ENV</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>io.github.rawvoid</groupId>
+                            <artifactId>jaxb-plugins</artifactId>
+                            <version>1.1.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>1.18.42</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>
