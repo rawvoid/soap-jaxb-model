@@ -43,6 +43,10 @@
                         <arg>-anno=@lombok.experimental.Accessors(chain = true)</arg>
                         <arg>-anno=@jakarta.annotation.Generated("https://github.com/rawvoid/jaxb-plugins")</arg>
 
+                        <arg>-add-to-class</arg>
+                        <arg>-regex=.*Envelope</arg>
+                        <arg>-anno=@jakarta.xml.bind.annotation.XmlRootElement(name = "Envelope")</arg>
+
                         <arg>-Xconvert-name</arg>
                         <arg>-package-name</arg>
                         <arg>-token=http://schemas.xmlsoap.org/soap/envelope/</arg>
