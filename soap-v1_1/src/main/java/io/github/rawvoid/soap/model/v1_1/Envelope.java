@@ -17,6 +17,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAnyAttribute;
 import jakarta.xml.bind.annotation.XmlAnyElement;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -55,6 +56,7 @@ import lombok.experimental.Accessors;
 @Generated({
     "https://github.com/rawvoid/jaxb-plugins"
 })
+@XmlRootElement(name = "Envelope")
 public class Envelope {
 
     @XmlElement(name = "Header", namespace = "http://schemas.xmlsoap.org/soap/envelope/")
