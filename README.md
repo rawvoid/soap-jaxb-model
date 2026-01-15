@@ -27,7 +27,7 @@ Add the dependency to your Maven `pom.xml`:
 <dependency>
     <groupId>io.github.rawvoid</groupId>
     <artifactId>soap-jaxb-model-v1_2</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -36,7 +36,7 @@ Add the dependency to your Maven `pom.xml`:
 <dependency>
     <groupId>io.github.rawvoid</groupId>
     <artifactId>soap-jaxb-model-v1_1</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
