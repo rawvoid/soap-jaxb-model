@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.github.rawvoid</groupId>
+        <artifactId>soap-jaxb-model-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>soap-jaxb-model-v1_1</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Soap JAXB Model V1.1</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>4.0.12</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources/META-INF/soap</schemaDirectory>
+                    <generateDirectory>${project.build.sourceDirectory}</generateDirectory>
+                    <episodeFile>${project.build.outputDirectory}/META-INF/sun-jaxb.episode</episodeFile>
+                    <cleanPackageDirectories>true</cleanPackageDirectories>
+                    <locale>en_US</locale>
+                    <extension>true</extension>
+                    <args>
+                        <arg>-Xremove-getter</arg>
+                        <arg>-Xremove-setter</arg>
+
+                        <arg>-Xannotate</arg>
+                        <arg>-add-to-class</arg>
+                        <arg>-anno=@lombok.Data</arg>
+                        <arg>-anno=@lombok.experimental.Accessors(chain = true)</arg>
+                        <arg>-anno=@jakarta.annotation.Generated("https://github.com/rawvoid/jaxb-plugins")</arg>
+
+                        <arg>-Xconvert-name</arg>
+                        <arg>-package-name</arg>
+                        <arg>-token=http://schemas.xmlsoap.org/soap/envelope/</arg>
+                        <arg>-name=io.github.rawvoid.soap.model.v1_1</arg>
+
+                        <arg>-property-name</arg>
+                        <arg>-token=faultcode</arg>
+                        <arg>-name=faultCode</arg>
+
+                        <arg>-property-name</arg>
+                        <arg>-token=faultstring</arg>
+                        <arg>-name=faultString</arg>
+
+                        <arg>-property-name</arg>
+                        <arg>-token=faultactor</arg>
+                        <arg>-name=faultActor</arg>
+
+                        <arg>-Xns-prefix</arg>
+                        <arg>-config</arg>
+                        <arg>-xmlns</arg>
+                        <arg>-ns=http://schemas.xmlsoap.org/soap/envelope/</arg>
+                        <arg>-prefix=SOAP-ENV</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>io.github.rawvoid</groupId>
+                            <artifactId>jaxb-plugins</artifactId>
+                            <version>1.2.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>1.18.42</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
