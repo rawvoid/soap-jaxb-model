@@ -19,7 +19,7 @@ module.exports = async ({github, context}) => {
     const sender = context.payload.sender.login.toLowerCase();
     let label = '';
 
-    if (sender === 'dependabot[bot]' || /^chore(\(deps.*\))?!?:/.test(title)) {
+    if (sender === 'dependabot[bot]' || /^chore\(deps[^)]*\)!?:/.test(title)) {
         label = 'dependencies';
     }
     else if (/^feat(\(.*\))?!?:/.test(title)) label = 'feature';
