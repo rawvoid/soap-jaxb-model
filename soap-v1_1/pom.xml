@@ -76,7 +76,7 @@
                         <plugin>
                             <groupId>io.github.rawvoid</groupId>
                             <artifactId>jaxb-plugins</artifactId>
-                            <version>1.2.0</version>
+                            <version>1.6.0</version>
                         </plugin>
                     </plugins>
                 </configuration>
